@@ -60,8 +60,6 @@ class CompanyController extends Controller
      */
     public function update(CompanyRequest $request, $id)
     {
-        dd($request->all());
-
         $validatedData = $request->validated();
 
         $company = Company::findOrFail($id);

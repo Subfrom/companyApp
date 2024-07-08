@@ -8,6 +8,13 @@
                 <div class="card-header">{{ __('Edit') }}</div>
 
                 <div class="card-body">
+                    @if($errors->any())
+                        <div class="alert alert-danger" role="alert">
+                            @foreach($errors->all() as $error)
+                                {{ $error }}<br/>
+                            @endforeach
+                        </div>
+                    @endif
                     <form action="{{ route('companies.update', $company->id) }}" method="post">
                         @csrf
                         @method('PUT')
