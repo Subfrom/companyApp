@@ -19,15 +19,15 @@
                         @csrf
                         @method('PUT')
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="name" placeholder="ชื่อบริษัท" value="{{ $company->name }}">
+                            <input type="text" class="form-control" id="name" name="name" placeholder="ชื่อบริษัท" value="{{ $company->name }}">
                             <label for="name">Name</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="address" placeholder="ที่อยู่" value="{{ $company->address }}">
+                            <input type="text" class="form-control" id="address" name="address" placeholder="ที่อยู่" value="{{ $company->address }}">
                             <label for="address">Address</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="email" class="form-control" id="email" placeholder="อีเมล" value="{{ $company->email }}">
+                            <input type="email" class="form-control" id="email" name="email" placeholder="อีเมล" value="{{ $company->email }}">
                             <label for="email">Email</label>
                         </div>
                         @if($company->logo)
@@ -36,11 +36,11 @@
                         </div>
                         @endif
                         <div class="input-group mb-3">
-                            <input type="file" class="form-control" id="logo">
+                            <input type="file" class="form-control" id="logo" name="logo">
                             <label class="input-group-text" for="logo">Upload</label>
                         </div>                      
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="website" placeholder="เว็บไซต์" value="{{ $company->website }}">
+                            <input type="text" class="form-control" id="website" name="website" placeholder="เว็บไซต์" value="{{ $company->website }}">
                             <label for="website">Website</label>
                         </div>
                         <a href="{{ route('companies.index') }}" class="btn btn-secondary">ยกเลิก</a>
