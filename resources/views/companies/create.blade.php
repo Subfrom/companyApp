@@ -15,7 +15,7 @@
                             @endforeach
                         </div>
                     @endif
-                    <form action="{{ route('companies.store') }}" method="post">
+                    <form action="{{ route('companies.store') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="form-floating mb-3">
                             <input type="text" class="form-control" id="name" name="name" placeholder="ชื่อบริษัท">

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CompanyRequest;
 use App\Models\Company;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class CompanyController extends Controller
 {
@@ -30,11 +31,16 @@ class CompanyController extends Controller
      */
     public function store(CompanyRequest $request)
     {
-        $validatedData = $request->validated();
+        $company = new Company($request->validated());
 
-        Company::create($validatedData);
+        if ($request->hasFile('logo')) {
+            $logoPath = $request->file('logo')->store('logos', 'public');
+            $company->logo = $logoPath;
+        }
 
-        return redirect()->route('companies.index')->with('success', 'Company created successfully');
+        $company->save();
+
+        return redirect()->route('companies.index')->with('success', 'Company created successfully.');
     }
 
     /**
@@ -58,14 +64,23 @@ class CompanyController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(CompanyRequest $request, $id)
+    public function update(CompanyRequest $request, Company $company)
     {
-        $validatedData = $request->validated();
+        $company->fill($request->validated());
 
-        $company = Company::findOrFail($id);
-        $company->update($validatedData);
+        if ($request->hasFile('logo')) {
+            // Delete the old logo if it exists
+            if ($company->logo && Storage::disk('public')->exists($company->logo)) {
+                Storage::disk('public')->delete($company->logo);
+            }
 
-        return redirect()->route('companies.index')->with('success', 'Company updated successfully');
+            $logoPath = $request->file('logo')->store('logos', 'public');
+            $company->logo = $logoPath;
+        }
+
+        $company->save();
+
+        return redirect()->route('companies.index')->with('success', 'Company updated successfully.');
     }
 
     /**
@@ -73,9 +88,15 @@ class CompanyController extends Controller
      */
     public function destroy($id)
     {
-        $company = Company::findOrFail($id);
+        $company = Company::find($id);
+
+        // Delete the logo if it exists
+        if ($company->logo && Storage::disk('public')->exists($company->logo)) {
+            Storage::disk('public')->delete($company->logo);
+        }
+
         $company->delete();
 
-        return redirect()->route('companies.index')->with('success', 'Company deleted successfully');
+        return redirect()->route('companies.index')->with('success', 'Company deleted successfully.');
     }
 }
