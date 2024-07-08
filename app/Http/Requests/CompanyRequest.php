@@ -33,18 +33,18 @@ class CompanyRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'name.required' => 'Company name is required',
-            'name.string' => 'Company name must be a string',
-            'name.max' => 'Company name must not be greater than 255 characters',
-            'address.required' => 'Company address is required',
-            'address.string' => 'Company address must be a string',
-            'address.max' => 'Company address must not be greater than 255 characters',
-            'email.required' => 'Company email is required',
-            'email.email' => 'Company email must be a valid email address',
-            'email.unique' => 'Company email must be unique',
-            'logo.image' => 'Company logo must be an image',
-            'logo.dimensions' => 'Company logo must be at least 100x100 pixels',
-            'website.url' => 'Company website must be a valid URL',
+            'name.required' => 'จำเป็นต้องระบุชื่อบริษัท',
+            'name.string' => 'ชื่อบริษัทต้องเป็นสตริง',
+            'name.max' => 'ชื่อบริษัทต้องไม่ยาวเกิน 255 ตัวอักษร',
+            'address.required' => 'จำเป็นต้องระบุที่อยู่บริษัท',
+            'address.string' => 'ที่อยู่บริษัทต้องเป็นสตริง',
+            'address.max' => 'ที่อยู่บริษัทต้องไม่ยาวเกิน 255 ตัวอักษร',
+            'email.required' => 'จำเป็นต้องระบุอีเมลบริษัท',
+            'email.email' => 'อีเมลบริษัทต้องเป็นอีเมลที่ถูกต้อง',
+            'email.unique' => 'อีเมลบริษัทต้องไม่ซ้ำกับอีเมลอื่น',
+            'logo.image' => 'โลโก้บริษัทต้องเป็นรูปภาพ',
+            'logo.dimensions' => 'โลโก้บริษัทต้องมีขนาดอย่างน้อย 100x100 พิกเซล',
+            'website.url' => 'เว็บไซต์บริษัทต้องเป็น URL ที่ถูกต้อง',
         ];
     }
 }

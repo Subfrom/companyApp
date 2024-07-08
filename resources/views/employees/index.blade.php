@@ -2,6 +2,7 @@
 
 @section('content')
 <div class="container">
+    <a href="{{ route('employees.create') }}" class="btn btn-primary">Add Employee</a>
     <div class="row justify-content-center">
         <table class="table table-hover">
             <thead>
@@ -23,17 +24,18 @@
                     <td>{{ $employee->email }}</td>
                     <td>{{ $employee->phone }}</td>
                     <td>
-                        {{-- <a href="{{ route('employee.edit', $employee->id) }}" class="btn btn-primary">Edit</a>
-                        <form action="{{ route('employee.destroy', $employee->id) }}" method="POST" style="display: inline;">
+                        <a href="{{ route('employees.edit', $employee->id) }}" class="btn btn-primary">Edit</a>
+                        <form action="{{ route('employees.destroy', $employee->id) }}" method="POST" style="display: inline;">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger">Delete</button>
-                        </form> --}}
+                        </form>
                     </td>
                 </tr>
                 @endforeach
             </tbody>
         </table>
+        {!! $employees->withQueryString()->links('pagination::bootstrap-5') !!}
     </div>
 </div>
 @endsection
